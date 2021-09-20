@@ -1,0 +1,274 @@
+span,
+a {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+
+  /* 以下两个属性目前并未支持，写在这里为了减少风险 */
+  -o-user-select: none;
+  user-select: none;
+}
+.all-page {
+  height: 100vh;
+}
+body {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  scrollbar-width: 6px;
+  ::scrollbar-thumb {
+    background-color: #ece6e6;
+    border-radius: 5px;
+  }
+  //滚动条的滑块
+  ::-webkit-scrollbar-thumb {
+    background-color: #ece6e6;
+    border-radius: 5px;
+  }
+}
+.quick-acting {
+  font-size: 30px;
+  font-weight: bold;
+  position: fixed;
+  text-align: center;
+  user-select: none;
+  left: 20px;
+  top: 15%;
+  cursor: pointer;
+  background-color: rgba(7, 252, 39);
+  opacity: 0.2;
+  border-radius: 8px;
+  z-index: 2;
+  &:hover {
+    background-color: rgba(47, 245, 73, 0.6);
+    opacity: 1;
+  }
+  div {
+    border-radius: 8px;
+    padding: 15px;
+  }
+  span {
+    font-size: 18px;
+    display: inline-block;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    border-radius: 8px;
+    right: 0;
+    &:hover + div,
+    &:hover {
+      color: rgb(230, 74, 139);
+      background-color: rgba(238, 68, 68, 0.6);
+    }
+  }
+}
+//当界面弹出时隐藏主页面的滚动条
+.page {
+  padding: 50px 2%;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  button {
+    margin: 20px 0;
+  }
+
+  span {
+    font-weight: bold;
+  }
+  input {
+    border: none;
+    outline: none;
+  }
+  .filter {
+    display: inline-block;
+    border: 2px solid rgb(51, 51, 51);
+    font-size: 20px;
+    width: auto;
+    input {
+      border: none;
+      outline: none;
+      width: 100px;
+      height: 90%;
+    }
+  }
+}
+.filter-area {
+  margin-top: 20px;
+}
+table {
+  height: 300px;
+  overflow: auto;
+  font-size: 16px;
+  display: block;
+  font-weight: bold;
+  div {
+    display: inherit;
+  }
+  tr {
+    border: 1px solid rgb(24, 24, 24);
+  }
+  th,
+  td {
+    border-right: 1px solid rgb(24, 24, 24);
+    empty-cells: show;
+  }
+}
+.possiblekey-container {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+
+  /* 以下两个属性目前并未支持，写在这里为了减少风险 */
+  -o-user-select: none;
+  user-select: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  overflow: auto;
+  z-index: 12;
+  right: 0;
+  background-color: rgb(253, 237, 251);
+  .possiblekey-title {
+    text-align: center;
+    font-size: 28px;
+    span {
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(252, 105, 244);
+      }
+    }
+  }
+  .preview-container {
+    display: block;
+    text-align: center;
+    height: 300px;
+    // transform: translateY(50%);
+    overflow: auto;
+    padding: 20px 0;
+    table {
+      // transform: translateY(-50%);
+      display: inline-block;
+      height: auto;
+      tr,
+      td {
+        height: 1.1em;
+        font-size: 16px;
+      }
+    }
+    p {
+      margin: 0;
+      // transform: translateY(-50%);
+    }
+  }
+  .possiblekeys-page {
+    width: 100%;
+    background: none;
+    position: fixed;
+    z-index: 12;
+    top: 50px;
+    bottom: 0;
+    width: 100%;
+    overflow: auto;
+    ul {
+      font-size: 12px;
+      padding: 0;
+      width: 100%;
+      display: inline-block;
+      line-height: 50px;
+      vertical-align: middle;
+      align-items: center;
+      cursor: pointer;
+      margin: 5px 0;
+      background-color: rgb(187, 222, 224);
+      position: relative;
+      li {
+        a {
+          border: 1px solid rgb(97, 97, 97);
+          color: rgb(51, 51, 51);
+          margin: 0 5px;
+        }
+        .change-a:hover {
+          background-color: rgb(238, 172, 228);
+        }
+      }
+      &:nth-of-type(2n) {
+        background-color: rgb(173, 212, 191);
+      }
+      &:nth-last-of-type {
+        background-color: rgb(218, 207, 53);
+      }
+      &:hover {
+        background-color: rgb(153, 255, 153);
+        color: #000;
+      }
+      .message-delete {
+        position: absolute;
+        display: none;
+        font-size: 22px;
+        top: 0;
+        color: rgb(245, 241, 8);
+        width: 90%;
+        height: 100%;
+        text-align: center;
+        .line-delete {
+          background-color: rgb(210, 245, 8);
+          border-radius: 8px;
+          height: 10%;
+          width: 100%;
+          position: absolute;
+          top: 45%;
+        }
+      }
+      .icon-delete {
+        height: 100%;
+        line-height: 100%;
+        font-size: 40px;
+        position: absolute;
+        left: 0;
+        width: 60px;
+        color: rgb(163, 127, 102);
+        text-align: center;
+        display: inline-block;
+        &:hover + div,
+        &:hover {
+          background-size: 100%;
+          background-color: rgb(248, 29, 29);
+          .message-delete {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+ul,
+li {
+  list-style: none;
+  display: block;
+}
+.filFirstFile-true {
+  margin: 0 15px;
+  color: rgb(98, 98, 98);
+  padding: 0 10px;
+  text-decoration: underline;
+  &:hover {
+    background-color: rgb(253, 109, 145);
+    color: #fff;
+    border-radius: 10px;
+  }
+}
+.filFirstFile-false {
+  color: rgb(42, 6, 248);
+  background-color: rgb(250, 141, 159);
+  border-radius: 30px;
+  margin: 0 15px;
+  padding: 0 10px;
+  &:hover {
+    background-color: rgb(248, 242, 242);
+    color: rgb(112, 112, 112);
+  }
+}

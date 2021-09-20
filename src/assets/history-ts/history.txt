@@ -1,0 +1,262 @@
+{(filters || initfilters).map((filter: filterType, index: number) => (
+          <div className={styles['filter']}>
+            <div className={styles['filter-top']}>
+              <span>需要提取的文件后缀名：</span>
+              <input
+                type="text"
+                onChange={(ele) => {
+                  console.log('xiugai')
+                  changeFileSuffix(ele?.currentTarget?.textContent || 'txt', index)
+                }}
+                placeholder={'默认txt'} />
+              <Dropdown overlay={(
+                <Menu>
+                  <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" >
+                      所有文件
+                      </a>
+                  </Menu.Item>
+                </Menu>
+              )}>
+                <a className="ant-dropdown-link">
+                  <span style={{ textDecoration: 'underline' }}>
+                    {filter.fileSuffix}
+                  </span>
+                  <DownOutlined />
+                </a>
+              </Dropdown>
+
+              <br />
+              <span>是否需要自动加上行名或列名</span>
+              <Dropdown overlay={(
+                <Menu>
+                  <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" >
+                      否
+                    </a>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" >
+                      是
+                    </a>
+                  </Menu.Item>
+                </Menu>
+              )}>
+                <a
+                  style={{ textDecoration: 'underline' }}
+                  className="ant-dropdown-link">
+                  {filter.needAddTitleAuto ? '是' : '否'}
+                  <DownOutlined />
+                </a>
+              </Dropdown>
+              <br />
+              <span>合并规则</span>
+              <Dropdown overlay={(
+                <Menu>
+                  <Menu.Item>
+                    <a>
+                      完全合并
+                    </a>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <a>
+                      每个文件分开合并
+                    </a>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <a>
+                      我都要
+                    </a>
+                  </Menu.Item>
+                </Menu>
+              )}>
+                <a
+                  style={{ textDecoration: 'underline' }}
+                  className="ant-dropdown-link">
+                  {filter.mergeRule}
+                  <DownOutlined />
+                </a>
+              </Dropdown>
+            </div>
+            <div className={styles['filter-bottom']}>
+              {/* <div style={{ width: '90%' }}>
+                  <span
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      height: '30px'
+                    }}>
+                    行名
+                  </span>
+                </div> */}
+                需要转为excel的行、列：
+                <div className={styles['filter-table']}>
+                {/* <span
+                    style={{
+                      width: '30px',
+                      height: '400px'
+                    }}
+                  >
+                    列
+                    <br />
+                    名
+                  </span> */}
+                <table ref={tableEle}>
+                  <tr>
+                    <td>每列类型</td>
+                    {
+                      filter?.valueType?.map((type) => (
+                        <td>
+                          <Dropdown overlay={(
+                            <Menu>
+                              <Menu.Item>
+                                <a>
+                                  数字
+                                </a>
+                              </Menu.Item>
+                              <Menu.Item>
+                                <a >
+                                  字符
+                                </a>
+                              </Menu.Item>
+                              <Menu.Item>
+                                <a >
+                                  百分数
+                    </a>
+                              </Menu.Item>
+                            </Menu>
+                          )}>
+                            <a className="ant-dropdown-link">
+                              <span style={{ textDecoration: 'underline' }}>
+                                {filter.valueType}
+                              </span>
+                              <DownOutlined />
+                            </a>
+                          </Dropdown>
+                        </td>
+                      ))
+                    }
+                  </tr>
+                  <tr>
+                    <th>名称</th>
+                    {
+                      filter?.rowTitle?.map((title: string) => (
+                        <th contentEditable>
+                          {title}
+                        </th>
+                      ))
+                    }
+                    <a style={{ fontSize: '20px', border: 'none' }}>
+                      <PlusCircleOutlined />
+                    </a>
+                    <a style={{ fontSize: '20px', border: 'none' }}>
+                      <MinusCircleOutlined />
+                    </a>
+                  </tr>
+
+                </table>
+              </div>
+
+            </div>
+          </div>
+        ))
+        }
+
+  const [filters, setFilters] = useState<filtersType>(initfilters)
+
+
+  .filter-bottom{
+      display: flex;
+      flex-direction: column;
+      span{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border:1px solid rgb(54,54,54);
+      }
+      .filter-table{
+      display: flex;
+      flex-direction: row;
+      a{
+        span{
+          border: none;
+        }
+      }
+      td,th{
+        border:1px solid rgb(54,54,54);
+      }
+      }
+    }
+
+
+
+    <table ref={tableEle}>
+                {
+                  arrOfArrJson.map((arrjson)=>{
+                    <>
+                <thead>
+                  <tr>
+                    {
+                        <td>
+                          {/* <tr> */}
+                          {arrjson[0].row}
+                          {/* </tr> */}
+                        </td>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                      arrjson.map((json)=>(
+                        <tr>
+                          <td>{json.column}</td>
+                        </tr>
+                    ))
+                  }
+                  
+                </tbody>
+                </>
+                {/* <thead>
+                  {
+                    Object.keys(jsonForTurn[0])?.length > 0 && (
+                      <tr>
+                        {
+                          Object.keys(jsonForTurn[0]).map((key) => (
+                            <>
+                              {
+                                key !== 'row'
+                                && key !== 'column'
+                                && (
+                                  <th>
+                                    {key}
+                                  </th>
+                                )
+                              }
+                            </>
+                          ))
+                        }
+                      </tr>
+                    )
+                  }
+
+                </thead> */}
+                {/* <tbody>
+                  {
+                    jsonForTurn.map((obj: jsonType) => (
+                      <tr>
+                        {keys.map((res, index: number) => (
+                          obj[`${textName}-列${index + 1}`]
+                            ? (<td>
+                              {obj[`${textName}-列${index + 1}`]}
+                            </td>)
+                            : (<>
+
+                            </>)
+                        ))}
+                      </tr>
+                    ))
+                  }
+                </tbody> */}
+                })
+}
+              </table>
